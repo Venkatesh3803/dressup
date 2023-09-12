@@ -10,7 +10,7 @@ const ProductsPage = () => {
   return (
     <div>
       <Navber />
-      <ProductsList products="PRODUCTS" fillters />
+      <ProductsList products="PRODUCTS" fillters/>
       <Footer />
     </div>
   )

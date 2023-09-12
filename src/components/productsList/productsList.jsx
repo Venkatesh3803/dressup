@@ -5,16 +5,16 @@ import { publicRequest } from "../../redux/apicalls"
 
 
 const Products = ({ popular, products, singlepage, fillters }) => {
-    const gender = window.location.search.split("=")[1]
     const [size, setSize] = useState("")
     const [color, setColor] = useState("")
     const [cat, setCat] = useState("")
-
-
     const [prod, setProd] = useState("")
+
+    const gender = window.location.search.split("=")[1]
+ console.log(gender)
     useEffect(() => {
         const getAllProducts = async () => {
-            const res = await publicRequest.get(gender ? `/product?size=${size}&color=${color}&cat=${cat}` : "/product");
+            const res = await publicRequest.get(gender ? `/product?gender=${gender}&size=${size}&color=${color}&cat=${cat}` : "/product");
             const date = await res.data;
             setProd(date)
         }
@@ -92,12 +92,12 @@ const Products = ({ popular, products, singlepage, fillters }) => {
 
 
             <div className={products ? "product-container-forpage" : "product-container"}>
-
                 {prod && prod.products.map((product) => {
                     return (
                         <ProductsCard key={product._id} single={singlepage} prod={product} />
                     )
                 })}
+                {prod.length === 0 && <h2 style={{ textAlign: "center", marginTop: "4rem" }}> No Results Found</h2>}
 
             </div>
         </div >

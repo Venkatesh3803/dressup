@@ -53,6 +53,7 @@ const MyOrders = () => {
             {/* orders design */}
             <div className="myorders">
                 <div className="myorders_container">
+                    {orders.length === 0 && <h2 style={{ textAlign: "center", marginTop: "4rem" }}> No Orders Found</h2>}
                     {orders && orders?.map((o) => {
                         return (
 

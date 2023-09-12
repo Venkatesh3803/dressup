@@ -15,7 +15,6 @@ const Register = () => {
     const dispatch = useDispatch()
 
 
-    console.log(error, isLoading)
     const handleChange = (e) => {
         if (e.target.name === "email") {
             setEmail(e.target.value)
@@ -42,6 +41,8 @@ const Register = () => {
         })
         register(dispatch, { username, password, email })
         reset()
+
+        
     }
 
     return (

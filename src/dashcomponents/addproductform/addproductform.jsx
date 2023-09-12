@@ -105,8 +105,9 @@ const Addproductform = () => {
                         <label htmlFor="">Gender:-</label>
                         <select name="gender" id="gender" onChange={(e) => setGender(e.target.value)} required>
                             <option>Options</option>
-                            <option>Male</option>
-                            <option>Female</option>
+                            <option value={"mens"}>Mens</option>
+                            <option value={"womens"}>Womens</option>
+                            <option value={"kids"}>Kids</option>
                         </select>
                     </div>
 

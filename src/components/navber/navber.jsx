@@ -1,7 +1,6 @@
 import "./navber.css"
 import { AiOutlineMenuUnfold, AiOutlineSearch, AiOutlineShoppingCart } from "react-icons/ai"
 import { CgProfile } from "react-icons/cg"
-
 import { MdCancel } from "react-icons/md"
 import { useState } from "react"
 import NewArrivalsList from "../newArrivals/NewArrivalsList"
@@ -37,20 +36,20 @@ const Navber = () => {
         <div className="nav-links">
           <ul className={active ? "list-active" : "list"}>
 
-            <Link to={"/products?category=mens"} onMouseEnter={() => setMens(true)} style={{ textDecoration: "none" }}>
+            <Link to={"/products?gender=mens"} onMouseEnter={() => setMens(true)} style={{ textDecoration: "none" }}>
               <li>MENS </li>
             </Link>
-            <Link onMouseEnter={() => setMens(true)} style={{ textDecoration: "none" }}>
+            <Link to={"/products?gender=women"} onMouseEnter={() => setMens(true)} style={{ textDecoration: "none" }}>
               <li>WOMENS </li>
             </Link>
-            <Link to={"../products?category=accessories"} style={{ textDecoration: "none" }}>
+            <Link to={"/products?cat=accessories"} style={{ textDecoration: "none" }}>
               <li>ACCESSORIE</li>
             </Link>
 
-            <Link to={"../products?category=delux"} style={{ textDecoration: "none" }}>
+            <Link to={"/products?cat=delux"} style={{ textDecoration: "none" }}>
               <li>DE-EXCLUSIVE </li>
             </Link>
-            <Link to={"../products?category=shoes"} style={{ textDecoration: "none" }}>
+            <Link to={"/products?cat=shoes"} style={{ textDecoration: "none" }}>
               <li>SHOES </li>
             </Link>
             <MdCancel className="cancle" onClick={() => setActive(false)} />
@@ -94,7 +93,7 @@ const Navber = () => {
         }
 
         {profile &&
-          <Profile setProfile = {setProfile}/>
+          <Profile setProfile={setProfile} />
         }
 
       </div>
