@@ -53,7 +53,7 @@ const Products = ({ popular, products, singlepage, fillters }) => {
                                 <option value={"pink"}>pink</option>
                                 <option value={"black"}>black</option>
                                 <option value={"orange"}>orange</option>
-                                <option value={"merron"}>merron</option>
+                                <option value={"maroon"}>maroon</option>
                                 <option value={"white"}>white</option>
                                 <option value={"green"}>green</option>
                             </select>
@@ -66,9 +66,10 @@ const Products = ({ popular, products, singlepage, fillters }) => {
                             <select name="" id="category" onChange={(e) => setCat(e.target.value)}>
                                 <option value={""}>Select</option>
                                 <option value={"t-shirt"}>T-shirt</option>
-                                <option value={"shirt"}>Shirt</option>
+                                <option value={"shirt"}>Shirts</option>
                                 <option value={"kurtha"}>Kurthas</option>
-                                <option value={"hoodies"}>Hoodies</option>
+                                <option value={"dress"}>Dresses</option>
+                                <option value={"hoodie"}>Hoodies</option>
                                 <option value={"jeans"}>Jeans</option>
                                 <option value={"shorts"}>Shorts</option>
                                 <option value={"accessories"}>Accessories</option>

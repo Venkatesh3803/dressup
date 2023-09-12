@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import SideBar from '../../dashcomponents/sidebar/sideBar'
 import DashNavbar from '../../dashcomponents/dashNavber/dashNavber'
-import { userRequest } from '../../redux/apicalls' 
+import { userRequest } from '../../redux/apicalls'
+import { toast } from 'react-toastify'
 
 const DashboardOrderspage = () => {
     const [orders, setOrders] = useState("")
@@ -18,6 +19,34 @@ const DashboardOrderspage = () => {
         }
         getUser();
     }, [])
+
+
+
+    const handleStatus = async (id, status) => {
+        if (status === "processing") {
+            status = "shipped"
+        } else if (status === "shipped") {
+            status = "dispatch"
+        } else if (status === "dispatch") {
+            status = "delivered"
+        } else if (status === "delivered") {
+            return toast.warn(" This Order Already Deliverd")
+        } else if (status === "cancel") {
+            status = "canceled"
+        } else if (status === "canceled") {
+            return toast.warn("This Order Already Canceled")
+        }
+
+        const res = await userRequest.patch(`/order/${id}`, {
+            status
+        });
+
+        const data = res.data;
+        if (data === "updated") {
+            toast.success("updated")
+        }
+    }
+
     return (
         <>
             <DashNavbar />
@@ -49,7 +78,7 @@ const DashboardOrderspage = () => {
                                         <td>
                                             {o.products.map((p) => {
                                                 return (
-                                                    <tr  key={p._id}>
+                                                    <tr key={p._id}>
                                                         <img src="https://m.media-amazon.com/images/I/71A8tXUbL9L._UY879_.jpg" alt="" />
                                                         <hr />
                                                     </tr>
@@ -59,7 +88,7 @@ const DashboardOrderspage = () => {
                                         <td>
                                             {o.products.map((p) => {
                                                 return (
-                                                    <tr  key={p._id}>
+                                                    <tr key={p._id}>
                                                         <p style={{ fontSize: "16px" }}>{p.name}</p>
                                                         <span >{p.color}</span> / <span>{p.size}</span>
                                                         <hr style={{ width: "100%" }} />
@@ -73,6 +102,7 @@ const DashboardOrderspage = () => {
                                                 return (
                                                     <tr key={p._id}>
                                                         {p.qty}
+                                                        <hr />
                                                     </tr>
                                                 )
                                             })}
@@ -83,8 +113,8 @@ const DashboardOrderspage = () => {
                                             <p>{o.email}</p>
                                         </td>
                                         <td>{o.paymentType}</td>
-                                        <td>Pending</td>
-                                        <td>Cancel</td>
+                                        <td ><button onClick={() => handleStatus(o._id, o.status)} style={{ padding: "0.3rem 0.5rem", borderRadius: "4px", backgroundColor: "blueviolet", color: 'white' }}>{o.status}</button></td>
+                                        <td><button onClick={() => handleStatus(o._id, o.status === "canceled" ? "canceled" : "cancel")} style={{ padding: "0.3rem 0.5rem", borderRadius: "4px", backgroundColor: "red", color: 'white' }}>Cancel</button></td>
                                     </tr>
                                 )
                             })}

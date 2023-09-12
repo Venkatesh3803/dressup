@@ -3,7 +3,7 @@ import { useState } from "react"
 import QuickView from "../quickView/quickView"
 import { Link } from "react-router-dom"
 
-const ProductsCard = ({single, prod}) => {
+const ProductsCard = ({ single, prod }) => {
     const [quickView, setQuickView] = useState(false)
 
     return (
@@ -30,7 +30,7 @@ const ProductsCard = ({single, prod}) => {
                                 </div>
                             </div>
                             <div className="d-right">
-                                <h2>${prod.price}</h2>
+                                <h2>₹{prod.price}</h2>
                                 <button>Add to Cart</button>
                             </div>
                         </div>
@@ -38,7 +38,7 @@ const ProductsCard = ({single, prod}) => {
                 </div>
             </div>
             {quickView &&
-                <QuickView setQuickView={setQuickView} product = {prod} />
+                <QuickView setQuickView={setQuickView} product={prod} />
             }
 
         </>

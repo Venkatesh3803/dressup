@@ -1,35 +1,51 @@
 import React, { useEffect, useState } from 'react'
 import Navber from '../../components/navber/navber'
 import Footer from '../../components/footer/Footer'
-import img from "../../images/1st pink 2.jpg"
 import "./myOrders.css"
-import axios from 'axios'
+import { userRequest } from '../../redux/apicalls'
+import { toast } from 'react-toastify'
+import { useSelector } from 'react-redux'
 
 
 
 
 const MyOrders = () => {
     const [orders, setOrders] = useState("")
-    const token = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : ""
+    const [cancel, setCancel] = useState("Cancel Order")
+    const user = useSelector((state) => state.auth.user)
 
     useEffect(() => {
-        const getUser = async () => {
+        const getOrders = async () => {
             try {
-                const res = await axios.get(`http://localhost:5000/api/order/single/${token._id}`, {
-                    headers: {
-                        "token": `Bearer ${token?.token}`
-                    }
-                });
+                const res = await userRequest.get(`/order/single/${user._id}`);
                 const date = await res.data;
                 setOrders(date)
             } catch (error) {
                 console.log(error)
             }
         }
-        getUser();
-    }, [token._id, token.token])
+        getOrders();
+    }, [user._id])
 
 
+    const handleCancel = async (id, cancel) => {
+        if (cancel === "cancel") {
+            cancel = "canceled"
+        } else if (cancel === "canceled") {
+            return toast.warn("Order Already Canceled")
+        }
+
+        // const res = await userRequest.patch(`/order/${id}`, {
+        //     cancel
+        // });
+
+        // const data = res.data;
+        // if (data === "updated") {
+        //     toast.success("Canceled")
+        // }
+
+        setCancel("Cancled")
+    }
 
     return (
         <div>
@@ -40,15 +56,18 @@ const MyOrders = () => {
                     {orders && orders?.map((o) => {
                         return (
 
-                            <div className="my_orders_list">
+                            <div className="my_orders_list" key={o._id}>
                                 <div className="myorders_top">
-                                    <h2>Order_id :-<span style={{ fontSize: "18px" }}>{o._id}</span></h2>
-                                    <p>Order placed <b>March 15, 2023</b></p>
+                                    <h4>Order_id :-<span style={{ fontSize: "18px" }}>{o._id.slice(0, 15)}...</span></h4>
+                                    <div className="order-status">
+                                        <p>Order placed <b>{o.createdAt.slice(0, 10)}</b></p>
+                                        <p>Status :- <b>{o.status}</b></p>
+                                    </div>
                                 </div>
                                 {o.products?.map((p) => {
                                     return (
                                         <>
-                                            <div className="myorders_card">
+                                            <div className="myorders_card" key={p._id}>
                                                 <div className="myorders_img">
                                                     <img src={p.image} alt="" />
                                                 </div>
@@ -75,7 +94,7 @@ const MyOrders = () => {
                                 })}
 
 
-                                {/* <hr /> */}
+                                <button className='cancel-btn' onClick={() => handleCancel(o._id, cancel === "Cancel Order" ? "cancel" : "canceled")}>{cancel}</button>
                                 <div className="myorders_bottom">
                                     <div className="myorders_billing_address">
                                         <h2>Billing Address</h2>

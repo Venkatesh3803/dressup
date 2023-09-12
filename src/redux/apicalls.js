@@ -2,7 +2,8 @@ import { RegisterFail, RegisterStarts, RegisterSucessFull, loginFail, loginStart
 import axios from "axios"
 
 
-
+// http://localhost:5000/api
+//https://dressup-backend.onrender.com/api
 const BASE_URL = "https://dressup-backend.onrender.com/api";
 export const publicRequest = axios.create({
     baseURL: BASE_URL,
@@ -10,7 +11,7 @@ export const publicRequest = axios.create({
 
 const user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : ""
 const TOKEN = user.token
-console.log(TOKEN)
+
 
 export const userRequest = axios.create({
     baseURL: BASE_URL,

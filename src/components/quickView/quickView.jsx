@@ -15,7 +15,7 @@ const QuickView = ({ setQuickView, product }) => {
                     </div>
                     <div className="qv-right">
                         <h2>{product.name} </h2>
-                        <h3>${product.price}</h3>
+                        <h3>₹{product.price}</h3>
                         <div className="rating">
                             <div className="stars">
                                 <AiTwotoneStar />

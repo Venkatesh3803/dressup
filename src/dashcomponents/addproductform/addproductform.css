@@ -45,8 +45,8 @@ select {
     border-radius: 4px;
 }
 
-.size{
-  display: flex;
+.size {
+    display: flex;
     gap: 1rem;
 }
 
@@ -55,19 +55,38 @@ select {
     width: fit-content;
 }
 
-.add-sizes {
-    display: flex;
-}
-
-
-.size-list{
+.size-list,
+.color-list {
     display: flex;
     gap: 1rem;
-   
 }
-.size-list li{
+
+.size-list li {
     padding: 0.4rem 1rem;
     border-radius: 4px;
-    background-color: rgb(69, 69, 64);
-   color: white;
+    background-color: rgb(68, 73, 209);
+    color: white;
+    width: fit-content;
+    margin-top: 0.5rem;
+}
+
+.color-list span {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid gray;
+}
+
+
+.color-and-size {
+    display: flex;
+    justify-content: space-between;
+}
+
+.add-size {
+    flex: 1;
+}
+
+.add-color {
+    flex: 1;
 }

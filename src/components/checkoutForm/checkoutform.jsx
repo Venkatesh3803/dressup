@@ -10,15 +10,17 @@ const Checkoutform = () => {
 
     const [payNow, setPayNow] = useState(false);
     const [inputs, setInputs] = useState({});
+    // const [qty, set] = useState({});
     const user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : ""
     const cart = useSelector((state) => state.cart);
-    const total = useSelector((state) => state.cart.total);
+    let total = useSelector((state) => state.cart.total);
     const dispatch = useDispatch()
     const { products } = cart;
-
     const handleChange = (e) => {
         setInputs(prevState => ({ ...prevState, [e.target.name]: e.target.value }));
     }
+    let shipping = 60;
+    total = total + shipping;
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -36,7 +38,7 @@ const Checkoutform = () => {
                 phonenumber: inputs.phonenumber,
                 paymentType: "COD",
             },
-                
+
 
             )
             const data = await res.data;
@@ -74,7 +76,7 @@ const Checkoutform = () => {
                                             <div className="checkout-qty">
                                                 <button>-</button>
                                                 <span>{prod.qty}</span>
-                                                <button>+</button>
+                                                <button >+</button>
                                             </div>
                                         </div>
                                     </div>
@@ -93,20 +95,20 @@ const Checkoutform = () => {
                     <div className="checkout-price-details">
                         <div className="checkout-subtotal">
                             <span>Subtotal</span>
-                            <span> ₹350.00</span>
+                            <span> ₹{total - shipping}.00</span>
                         </div>
                         <div className="checkout-subtotal">
                             <span>Shipping</span>
-                            <span> ₹10.00</span>
+                            <span> ₹{shipping}.00</span>
                         </div>
                         <div className="checkout-subtotal">
                             <span>Discount</span>
-                            <span> ₹15.00</span>
+                            <span> ₹0.00</span>
                         </div>
                         <hr />
                         <div className="checkout-subtotal">
                             <span style={{ fontWeight: "600" }}>Grand Total</span>
-                            <span> ₹{total}.00</span>
+                            <span> ₹{total + shipping}.00</span>
                         </div>
 
 

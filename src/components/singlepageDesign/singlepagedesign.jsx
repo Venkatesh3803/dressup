@@ -4,6 +4,7 @@ import ProductsList from "../../components/productsList/productsList"
 import { addToCart } from "../../redux/cartReducer"
 import { useDispatch } from "react-redux"
 import { useState } from "react"
+import { toast } from "react-toastify"
 
 const Singlepagedesign = ({ product }) => {
     const dispatch = useDispatch()
@@ -12,8 +13,6 @@ const Singlepagedesign = ({ product }) => {
     const [size, setSize] = useState("")
     const [qty, setQty] = useState(1);
 
-
-    console.log(product)
     const handleQty = (type) => {
         if (type === "inc") {
             setQty((prev) => qty !== 5 ? prev + 1 : 5)
@@ -23,7 +22,7 @@ const Singlepagedesign = ({ product }) => {
     }
     const handleCart = () => {
         if (size === "" || color === "") {
-            return alert("Select size and color")
+            return toast.warning("Select Color and Size")
         }
 
         dispatch(
