@@ -1,0 +1,16 @@
+.dashhomepage {
+    display: flex;
+}
+
+.dash-left {
+    flex: 1.5;
+}
+
+.dash-right {
+    flex: 8;
+    height: 86vh;
+    padding: 2rem 0;
+    overflow-y: scroll;
+    background-color: rgb(21, 21, 158);
+    color: white;
+}

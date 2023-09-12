@@ -1,0 +1,73 @@
+.product-form {
+    background-color: rgb(198, 226, 241);
+    width: 80%;
+    margin: auto;
+    border-radius: 8px;
+    padding: 2rem;
+    color: black;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem 3rem;
+}
+
+.form-rows {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 2rem;
+}
+
+.product-inputs {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+.product-inputs input {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 8px;
+}
+
+.product-inputs textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 8px;
+}
+
+select {
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+.size{
+  display: flex;
+    gap: 1rem;
+}
+
+.form-size-button {
+    padding: 10px;
+    width: fit-content;
+}
+
+.add-sizes {
+    display: flex;
+}
+
+
+.size-list{
+    display: flex;
+    gap: 1rem;
+   
+}
+.size-list li{
+    padding: 0.4rem 1rem;
+    border-radius: 4px;
+    background-color: rgb(69, 69, 64);
+   color: white;
+}

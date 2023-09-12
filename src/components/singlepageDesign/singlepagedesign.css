@@ -1,0 +1,187 @@
+.singlepagedesign {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.4);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: start;
+}
+
+.singlepagedesign-container {
+    margin: 2rem 0;
+    height: 95vh;
+    width: 90%;
+    position: relative;
+    background-color: rgb(213, 213, 213);
+    border-radius: 8px;
+}
+
+.singlepagedesign-product {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+
+.singlepagedesign-left {
+    width: 100%;
+    height: 100%;
+    flex: 1;
+    padding: 2rem;
+}
+
+.singlepagedesign-left img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.singlepagedesign-right {
+    flex: 1;
+    padding: 2rem;
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.singlepagedesign-right h2 {
+    font-size: 26px;
+}
+
+.singlepagedesign-right h3 {
+    font-size: 26px;
+    font-weight: 400;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.rating span {
+    cursor: pointer;
+}
+
+.rating .stars {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.size,
+.color {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.sizes,
+.colors {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.sizes span {
+    padding: 8px 20px;
+    border: 1px solid gray;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.sizes span:hover {
+    background-color: rgb(231, 228, 228);
+}
+
+.colors span {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    border: 2px solid gray;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    margin: 1px;
+}
+
+.colors span:hover {
+    border: 4px solid gray;
+}
+
+
+.singlepagedesign-right>button {
+    width: 100%;
+    padding: 12px;
+    background-color: rgb(92, 92, 252);
+    color: white;
+    font-weight: 500;
+    font-size: large;
+    cursor: pointer;
+    border: 1px solid gray;
+    transition: all 0.3s ease;
+}
+
+.singlepagedesign-right button:hover {
+    background-color: rgb(47, 47, 242);
+}
+
+.qty button {
+    width: 100%;
+    padding: 8px 18px;
+    background-color: rgb(139, 139, 139);
+    color: white;
+    font-weight: 500;
+    font-size: large;
+    cursor: pointer;
+    border: 1px solid gray;
+    transition: all 0.3s ease;
+    font-size: larger;
+}
+
+.qty button:hover {
+    background-color: rgb(103, 103, 107);
+}
+
+.selected {
+    background-color: beige;
+    border: 2px solid black;
+}
+
+@media screen and (max-width:780px) {
+    .singlepagedesign-container {
+        height: auto;
+        margin: 0;
+        width: 100%;
+    }
+
+    .singlepagedesign-left,
+    .singlepagedesign-right {
+        padding: 1rem;
+    }
+
+    .sizes span {
+        padding: 0.5rem 0.8rem;
+    }
+
+    .colors span {
+        width: 25px;
+        height: 25px;
+    }
+
+    .singlepagedesign-left img {
+        height: 60vh;
+    }
+
+    .singlepagedesign-product {
+        display: block;
+    }
+}

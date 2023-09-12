@@ -1,0 +1,34 @@
+.hero {
+    width: 100%;
+    height: 90vh;
+    overflow: hidden;
+}
+
+.hero-container {
+    width: 98%;
+    display: block;
+    margin: auto;
+    border-radius: 8px;
+}
+
+.swiper{
+    width: 100%;
+}
+
+.swiper-wripper{
+    width: 100%;
+}
+
+.swiper-slide{
+    width: 100%;
+    height: 85vh;
+    cursor: pointer;
+}
+.swiper-slide img{
+    width: 100%;
+    height: 85%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+
