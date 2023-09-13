@@ -22,23 +22,26 @@ const DashNavbar = () => {
                 <div className="nav-links">
                     <ul className={active ? "list-active" : "list"}>
 
-                        <Link to={"/products?category=mens"} style={{ textDecoration: "none" }}>
-                            <li>MENS </li>
+                        <Link to={"/addproduct"} style={{ textDecoration: "none" }}>
+                            <li>Add Product </li>
                         </Link>
-                        <Link tyle={{ textDecoration: "none" }} style={{ textDecoration: "none" }}>
-                            <li>WOMENS </li>
+                        <Link to={"/dashproducts"} tyle={{ textDecoration: "none" }} style={{ textDecoration: "none" }}>
+                            <li>Products </li>
                         </Link>
-                        <Link to={"../products?category=accessories"} style={{ textDecoration: "none" }}>
-                            <li>ACCESSORIE</li>
+                        <Link to={"/dashorders"} style={{ textDecoration: "none" }}>
+                            <li>Orders</li>
                         </Link>
 
-                        <Link to={"../products?category=delux"} style={{ textDecoration: "none" }}>
-                            <li>DE-EXCLUSIVE </li>
+                        <Link to={"/dashusers"} style={{ textDecoration: "none" }}>
+                            <li>Users </li>
                         </Link>
-                        <Link to={"../products?category=shoes"} style={{ textDecoration: "none" }}>
-                            <li>SHOES </li>
-                        </Link>
-                        <MdCancel className="cancle" />
+
+                        <li>Settings </li>
+
+
+                        <li>LogOut </li>
+
+                        <MdCancel className="cancle" onClick={() => setActive(!active)} />
                     </ul>
                 </div>
 

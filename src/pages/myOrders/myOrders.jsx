@@ -3,7 +3,7 @@ import Navber from '../../components/navber/navber'
 import Footer from '../../components/footer/Footer'
 import "./myOrders.css"
 import { userRequest } from '../../redux/apicalls'
-import { toast } from 'react-toastify'
+// import { toast } from 'react-toastify'
 import { useSelector } from 'react-redux'
 
 
@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux'
 
 const MyOrders = () => {
     const [orders, setOrders] = useState("")
-    const [cancel, setCancel] = useState("Cancel Order")
+    // const [cancel, setCancel] = useState("Cancel Order")
     const user = useSelector((state) => state.auth.user)
 
     useEffect(() => {
@@ -28,24 +28,24 @@ const MyOrders = () => {
     }, [user._id])
 
 
-    const handleCancel = async (id, cancel) => {
-        if (cancel === "cancel") {
-            cancel = "canceled"
-        } else if (cancel === "canceled") {
-            return toast.warn("Order Already Canceled")
-        }
+    // const handleCancel = async (id, cancel) => {
+    //     if (cancel === "cancel") {
+    //         cancel = "canceled"
+    //     } else if (cancel === "canceled") {
+    //         return toast.warn("Order Already Canceled")
+    //     }
 
-        // const res = await userRequest.patch(`/order/${id}`, {
-        //     cancel
-        // });
+    //     // const res = await userRequest.patch(`/order/${id}`, {
+    //     //     cancel
+    //     // });
 
-        // const data = res.data;
-        // if (data === "updated") {
-        //     toast.success("Canceled")
-        // }
+    //     // const data = res.data;
+    //     // if (data === "updated") {
+    //     //     toast.success("Canceled")
+    //     // }
 
-        setCancel("Cancled")
-    }
+    //     setCancel("Cancled")
+    // }
 
     return (
         <div>
@@ -95,7 +95,7 @@ const MyOrders = () => {
                                 })}
 
 
-                                <button className='cancel-btn' onClick={() => handleCancel(o._id, cancel === "Cancel Order" ? "cancel" : "canceled")}>{cancel}</button>
+                                {/* <button className='cancel-btn' onClick={() => handleCancel(o._id, cancel === "Cancel Order" ? "cancel" : "canceled")}>{cancel}</button> */}
                                 <div className="myorders_bottom">
                                     <div className="myorders_billing_address">
                                         <h2>Billing Address</h2>

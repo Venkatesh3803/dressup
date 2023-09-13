@@ -4,7 +4,7 @@ import axios from "axios"
 
 // http://localhost:5000/api
 //https://dressup-backend.onrender.com/api
-const BASE_URL = "https://dressup-backend.onrender.com/api";
+const BASE_URL = "/https://dressup-backend.onrender.com/api";
 export const publicRequest = axios.create({
     baseURL: BASE_URL,
 });

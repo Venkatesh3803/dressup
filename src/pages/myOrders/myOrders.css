@@ -1,5 +1,6 @@
 .myorders {
     width: 100%;
+    min-height: 89vh;
     background-color: rgb(239, 242, 245);
 }
 
@@ -127,4 +128,36 @@
     position: absolute;
     right: 0;
     bottom: 17rem;
+}
+
+
+@media screen and (max-width :1080px) {
+    .myorders_container {
+        padding: 2rem 1.5rem;
+    }
+
+
+}
+
+@media screen and (max-width :780px) {
+    .myorders_container {
+        padding: 1rem 0.5rem;
+    }
+
+
+    .myorders_card {
+        display: block;
+    }
+
+    .myorders_bottom {
+        display: block;
+        margin: 3rem 0 1rem 0;
+        padding: 1rem 2rem;
+    }
+}
+
+@media screen and (max-width :480px) {
+    .myorders_top {
+        display: block;
+    }
 }

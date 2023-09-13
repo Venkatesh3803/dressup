@@ -90,3 +90,25 @@ select {
 .add-color {
     flex: 1;
 }
+
+@media screen and (max-width : 780px) {
+    .form {
+        display: flex;
+        gap: 0.5rem;
+        padding: 0;
+        align-items: center;
+    }
+
+    .form-rows {
+        display: block;
+        margin-top: 0.5rem;
+    }
+
+    .product-inputs input {
+        padding: 0.2rem;
+    }
+
+    .color-and-size {
+        display: block;
+    }
+}

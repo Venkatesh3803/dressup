@@ -8,12 +8,29 @@
 .dashstats-top {
     display: flex;
     align-items: center;
+    justify-content: center;
+    margin: auto;
+    align-items: center;
     gap: 2rem;
 }
 
-.dashstats-buttom{
+.dashstats-buttom {
     width: 100%;
     height: 65vh;
     margin-top: 4rem;
 }
 
+
+
+@media screen and (max-width:1080px) {
+    .dashstats-top {
+        flex-wrap: wrap;
+    }
+}
+@media screen and (max-width:780px) {
+    .dashstats {
+        padding: 1rem;
+    }
+
+
+}

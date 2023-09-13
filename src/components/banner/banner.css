@@ -28,3 +28,30 @@
 .banner button:hover{
    background-color: rgba(0, 0, 0, 0.314);
 }
+
+@media screen and (max-width : 1080px) {
+    .banner{
+     height: 60vh;
+    }
+    .banner button{
+        padding: 0.6rem 1.5rem;
+        bottom: 1rem;
+        left: 1rem;
+        font-size: 14px;
+    }
+   
+  }
+  @media screen and (max-width : 780px) {
+    .banner{
+     height: 40vh;
+    }
+    .products p{
+     width: 90%;
+     margin: 0 auto;
+     font-size: 10px;
+    }
+    .products h1{
+   
+     font-size: 20px;
+    }
+  }

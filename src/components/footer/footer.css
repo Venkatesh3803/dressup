@@ -12,17 +12,17 @@
 
 .footer>p {
     text-align: center;
-    padding-top:1.5rem ;
+    padding-top: 1.5rem;
 }
 
 .footer-container {
-    display: block;
+    display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 4rem;
 }
 
-.footer-colums {
+.footer-right-list {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -30,7 +30,17 @@
 
 }
 
-.footer-colums>h4 {
+.footer-left {
+    flex: 1;
+}
+
+.footer-right {
+    flex: 3;
+    display: flex;
+    justify-content: space-around;
+}
+
+.footer-right-list>h4 {
     font-size: 20px;
 }
 
@@ -61,32 +71,38 @@
 
 .email-box input {
     color: white;
+    width: 100%;
+    padding: 0.4rem;
+    border-radius: 4px;
 }
 
 .email-box input::placeholder {
     color: white;
 }
 
-.footer-colums ul {
+.footer-right-list ul {
     display: flex;
     align-items: flex-start;
     gap: 0.5rem;
     flex-direction: column;
 }
 
-.footer-colums ul li {
+.footer-right-list ul li {
     color: rgb(220, 215, 215);
     font-size: 15px;
     transition: 0.3s ease;
     cursor: pointer;
+    width: 100%;
 }
 
-.footer-colums ul li:hover {
+.footer-right-list ul li:hover {
     color: rgb(249, 109, 109);
 }
 
-@media screen and (min-width:780px) {
- .footer-container{
-    display: flex;
- }   
+@media screen and (max-width:780px) {
+    .footer-container {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
 }

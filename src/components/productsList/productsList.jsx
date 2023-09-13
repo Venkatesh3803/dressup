@@ -9,9 +9,8 @@ const Products = ({ popular, products, singlepage, fillters }) => {
     const [color, setColor] = useState("")
     const [cat, setCat] = useState("")
     const [prod, setProd] = useState("")
+    const gender = window.location.pathname.split("/")[2]
 
-    const gender = window.location.search.split("=")[1]
- console.log(gender)
     useEffect(() => {
         const getAllProducts = async () => {
             const res = await publicRequest.get(gender ? `/product?gender=${gender}&size=${size}&color=${color}&cat=${cat}` : "/product");
@@ -19,7 +18,7 @@ const Products = ({ popular, products, singlepage, fillters }) => {
             setProd(date)
         }
         getAllProducts();
-    }, [gender, size, color, cat])
+    }, [size, color, cat])
 
 
 

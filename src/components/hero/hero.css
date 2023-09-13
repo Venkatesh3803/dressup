@@ -31,4 +31,9 @@
     border-radius: 10px;
 }
 
+@media screen and (max-width : 1080px) {
+    .hero{
+        height: auto;
+    }
+}
 

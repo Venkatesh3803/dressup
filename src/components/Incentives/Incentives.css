@@ -48,19 +48,85 @@
     margin: 3rem;
 }
 
-.in-delivery{
+.in-delivery {
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
 }
-.in-delivery h3{
-   color: rgb(62, 60, 60);
-}
-.in-delivery p{
-    font-size: 15px;
-   color: rgb(120, 118, 118);
+
+.in-delivery h3 {
+    color: rgb(62, 60, 60);
 }
 
-.in-icon{
-  width: 20%;
+.in-delivery p {
+    font-size: 15px;
+    color: rgb(120, 118, 118);
+}
+
+.in-icon {
+    width: 20%;
+}
+
+
+@media screen and (max-width : 1080px) {
+    .incentives-container {
+        padding: 1.5rem 2rem;
+    }
+
+    .in-left h1 {
+        font-size: 34px;
+    }
+}
+
+@media screen and (max-width : 780px) {
+    .incentives-container {
+        padding: 1.5rem 1rem;
+    }
+
+    .in-left h1 {
+        font-size: 26px;
+    }
+
+    .in-left p {
+        font-size: 14px;
+    }
+
+    .in-bottom {
+        margin: 0;
+        gap: 0.8rem;
+    }
+
+    .in-bottom p {
+        font-size: 13px;
+    }
+    .in-bottom h3 {
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width : 600px) {
+    .in-top {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width : 480px) {
+    .in-top {
+        flex-direction: column;
+    }
+
+    .in-bottom {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .in-bottom p {
+        font-size: 14px;
+    }
+    .in-bottom h3 {
+        font-size: 20px;
+    }
+    .in-bottom img {
+        width: 50px;
+    }
 }

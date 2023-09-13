@@ -21,9 +21,6 @@ const Navber = () => {
   const [cartOpen, setCartOpen] = useState(false)
   const [profile, setProfile] = useState(false)
 
-
-
-
   return (
     <div className="navber">
       <AiOutlineMenuUnfold style={{ cursor: "pointer" }} onClick={() => setActive(!active)} className="menu-icon" />
@@ -36,21 +33,21 @@ const Navber = () => {
         <div className="nav-links">
           <ul className={active ? "list-active" : "list"}>
 
-            <Link to={"/products?gender=mens"} onMouseEnter={() => setMens(true)} style={{ textDecoration: "none" }}>
+            <Link to={"/products/mens"} onMouseEnter={() => setMens(true)} style={{ textDecoration: "none" }}>
               <li>MENS </li>
             </Link>
-            <Link to={"/products?gender=women"} onMouseEnter={() => setMens(true)} style={{ textDecoration: "none" }}>
+            <Link to={"/products/women"} onMouseEnter={() => setMens(true)} style={{ textDecoration: "none" }}>
               <li>WOMENS </li>
             </Link>
             <Link to={"/products?cat=accessories"} style={{ textDecoration: "none" }}>
-              <li>ACCESSORIE</li>
+              <li>ACCESSORIES</li>
             </Link>
 
-            <Link to={"/products?cat=delux"} style={{ textDecoration: "none" }}>
-              <li>DE-EXCLUSIVE </li>
-            </Link>
             <Link to={"/products?cat=shoes"} style={{ textDecoration: "none" }}>
               <li>SHOES </li>
+            </Link>
+            <Link to={"/"} style={{ textDecoration: "none" }}>
+              <li>ABOUT </li>
             </Link>
             <MdCancel className="cancle" onClick={() => setActive(false)} />
           </ul>

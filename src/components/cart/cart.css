@@ -165,13 +165,23 @@ p {
 
 
 @media screen and (max-width : 780px) {
-    .cart-active {
-        width: 60%;
+    .cart-container {
+        width: 75%;
     }
+    .card-right-top h3{
+        font-size: 15px;
+    }
+    .card-right-top {
+       gap: 0;
+    }
+    .card-right-top .size{
+       gap: 0;
+    }
+    
 }
 
 @media screen and (max-width : 480px) {
-    .cart-active {
+    .cart-container {
         width: 100%;
     }
 }
