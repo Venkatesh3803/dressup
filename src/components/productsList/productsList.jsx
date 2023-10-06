@@ -1,24 +1,27 @@
 import "./productsList.css"
 import ProductsCard from "../productsCard/ProductsCard"
 import { useEffect, useState } from "react"
-import { publicRequest } from "../../redux/apicalls"
+import { publicRequest } from "../../requestMethods"
 
 
-const Products = ({ popular, products, singlepage, fillters }) => {
+
+const Products = ({ popular, products, singlepage, fillters, gend }) => {
     const [size, setSize] = useState("")
     const [color, setColor] = useState("")
     const [cat, setCat] = useState("")
     const [prod, setProd] = useState("")
-    const gender = window.location.pathname.split("/")[2]
+    const queries = window.location.pathname
+    const gender = queries.split("/")[2]
+
 
     useEffect(() => {
         const getAllProducts = async () => {
-            const res = await publicRequest.get(gender ? `/product?gender=${gender}&size=${size}&color=${color}&cat=${cat}` : "/product");
+            const res = await publicRequest.get(gender ? `/product?gender=${gender}&size=${size}&color=${color}&cat=${cat}` : `/product?gender=${gend}`);
             const date = await res.data;
             setProd(date)
         }
         getAllProducts();
-    }, [size, color, cat])
+    }, [size, color, cat, queries, gender])
 
 
 
@@ -71,7 +74,7 @@ const Products = ({ popular, products, singlepage, fillters }) => {
                                 <option value={"hoodie"}>Hoodies</option>
                                 <option value={"jeans"}>Jeans</option>
                                 <option value={"shorts"}>Shorts</option>
-                                <option value={"accessories"}>Accessories</option>
+                                <option value={"shoes"}>Shoes</option>
 
 
                             </select>
@@ -88,7 +91,6 @@ const Products = ({ popular, products, singlepage, fillters }) => {
                     </div>
                 </div>
                 : ""}
-
 
             <div className={products ? "product-container-forpage" : "product-container"}>
                 {prod && prod.products.map((product) => {

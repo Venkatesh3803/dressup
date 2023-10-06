@@ -3,14 +3,15 @@ import { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { clearCart, removeProduct } from "../../redux/cartReducer"
 import { toast } from "react-toastify"
-import { userRequest } from "../../redux/apicalls"
+import { userRequest } from "../../requestMethods"
+import { Link } from "react-router-dom"
+
 
 
 const Checkoutform = () => {
 
     const [payNow, setPayNow] = useState(false);
     const [inputs, setInputs] = useState({});
-    // const [qty, set] = useState({});
     const user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : ""
     const cart = useSelector((state) => state.cart);
     let total = useSelector((state) => state.cart.total);
@@ -68,21 +69,25 @@ const Checkoutform = () => {
                             <>
                                 <div key={prod.id} className="checkout-product-list">
                                     <div className="checkout-img">
+
                                         <img src={prod.image} alt="" />
+
                                         <div className="checkout-info">
-                                            <h4>{prod.name}</h4>
+                                            <Link to={`/singleproducts/${prod.id}`} className="link">
+                                                <h4>{prod.name}</h4>
+                                            </Link>
                                             <p>Color : {prod.color}</p>
                                             <p>Size : {prod.size}</p>
                                             <div className="checkout-qty">
                                                 <button>-</button>
                                                 <span>{prod.qty}</span>
-                                                <button >+</button>
+                                                <button>+</button>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="checkout-price">
                                         <p> ₹{prod.price}.00</p>
-                                        <button onClick={() => dispatch(removeProduct(prod.id))}>Remove</button>
+                                        <button onClick={() => dispatch(removeProduct(prod))}>Remove</button>
                                     </div>
                                 </div>
                                 <hr />

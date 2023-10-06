@@ -7,7 +7,7 @@ const WomensProducts = () => {
     return (
         <div>
         <Navber />
-        <ProductsList products="PRODUCTS" fillters/>
+        <ProductsList products="PRODUCTS" fillters gend={"women"}/>
         <Footer />
       </div>
     )

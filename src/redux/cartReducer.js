@@ -5,8 +5,8 @@ import { toast } from 'react-toastify';
 
 const initialState = {
     products: localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [],
-    quantity: localStorage.getItem("qty") ? JSON.parse(localStorage.getItem("qty")) :  0,
-    total:  localStorage.getItem("total") ? JSON.parse(localStorage.getItem("total")) : 0,
+    quantity: localStorage.getItem("qty") ? JSON.parse(localStorage.getItem("qty")) : 0,
+    total: localStorage.getItem("total") ? JSON.parse(localStorage.getItem("total")) : 0,
 }
 
 export const cartSlice = createSlice({
@@ -28,7 +28,7 @@ export const cartSlice = createSlice({
         clearCart: (state) => {
             state.quantity = 0;
             state.products = [];
-            state.total += 0;
+            state.total = 0;
             localStorage.removeItem("cart")
             localStorage.removeItem("total")
             localStorage.removeItem("qty")
@@ -36,7 +36,16 @@ export const cartSlice = createSlice({
 
 
         removeProduct: (state, action) => {
-            state.products = state.products.filter((id) => action.payload.id !== id)
+
+            const nextProducts = state.products.filter((cartItem) => cartItem.id !== action.payload.id);
+            const total = state.total - action.payload.price
+            state.products = nextProducts
+            state.quantity--
+            state.total = total
+
+            localStorage.setItem("cart", JSON.stringify(state.products))
+            localStorage.setItem("qty", JSON.stringify(state.quantity))
+            localStorage.setItem("total", JSON.stringify(state.total))
         },
     }
 })

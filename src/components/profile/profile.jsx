@@ -5,8 +5,9 @@ import { logOut } from "../../redux/authReducer"
 import { CgProfile } from 'react-icons/cg'
 import { AiOutlineLogout, AiOutlineSetting, AiOutlineShoppingCart } from 'react-icons/ai'
 import { LuLayoutDashboard } from 'react-icons/lu'
+import { userRequest } from '../../requestMethods'
 import { Link } from 'react-router-dom'
-import { userRequest } from '../../redux/apicalls'
+
 
 const Profile = ({ setProfile }) => {
     const user = useSelector((state) => state.auth.user)

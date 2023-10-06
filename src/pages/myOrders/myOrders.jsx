@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import Navber from '../../components/navber/navber'
 import Footer from '../../components/footer/Footer'
 import "./myOrders.css"
-import { userRequest } from '../../redux/apicalls'
-// import { toast } from 'react-toastify'
+
 import { useSelector } from 'react-redux'
+import { userRequest } from '../../requestMethods'
 
 
 

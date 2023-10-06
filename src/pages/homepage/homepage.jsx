@@ -16,10 +16,10 @@ const Homepage = () => {
             <Navber />
             <Hero />
             <Categories />
-            <ProductsList popular="New Arrivals" />
+            <ProductsList popular="Mens Popular Products" gend="mens" />
             <Banner />
-            <ProductsList popular="Popular Products" />
-            <Incentives/>
+            <ProductsList popular=" Womens Popular Products" gend="women" />
+            <Incentives />
             <Footer />
         </div>
     )

@@ -1,6 +1,5 @@
 import "./singlepagedesign.css"
 import { AiOutlineStar, AiTwotoneStar } from "react-icons/ai"
-import ProductsList from "../../components/productsList/productsList"
 import { addToCart } from "../../redux/cartReducer"
 import { useDispatch } from "react-redux"
 import { useState } from "react"
@@ -24,7 +23,6 @@ const Singlepagedesign = ({ product }) => {
         if (size === "" || color === "") {
             return toast.warning("Select Color and Size")
         }
-
         dispatch(
             addToCart({ name: product.name, size, color, qty, image: product.image, price: qty * product.price, id: product._id })
         );
@@ -82,7 +80,6 @@ const Singlepagedesign = ({ product }) => {
                     </div>
                 </div>
             </div>
-            <ProductsList products="YOU MAY ALSO LIKE" singlepage />
         </div >
     )
 }

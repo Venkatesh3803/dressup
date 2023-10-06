@@ -23,13 +23,17 @@ const Cart = ({ cartOpen, setCartOpen }) => {
           {products.length === 0 && <span style={{ textAlign: "center", margin: "2rem", fontSize: "26px" }}>Cart is empty</span>}
           {products && products?.map((item) => {
             return (
-              <div key={item._id} className="cart-card">
+              <div key={item.id} className="cart-card">
                 <div className="cart-card-left">
-                  <img src={item.image} alt="" />
+                  <Link to={`/singleproducts/${item.id}`}>
+                    <img src={item.image} alt="" />
+                  </Link>
                 </div>
                 <div className="cart-card-right">
                   <div className="card-right-top">
-                    <h3>{item.name}</h3>
+                    <Link to={`/singleproducts/${item.id}`} className="link">
+                      <h3>{item.name}</h3>
+                    </Link>
                     <div className="sizes">
                       <div className="size">
                         <h4>Size:-</h4>

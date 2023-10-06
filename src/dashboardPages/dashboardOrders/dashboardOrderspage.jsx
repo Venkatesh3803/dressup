@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import SideBar from '../../dashcomponents/sidebar/sideBar'
 import DashNavbar from '../../dashcomponents/dashNavber/dashNavber'
-import { userRequest } from '../../redux/apicalls'
 import { toast } from 'react-toastify'
+import { userRequest } from '../../requestMethods'
 
 const DashboardOrderspage = () => {
     const [orders, setOrders] = useState("")

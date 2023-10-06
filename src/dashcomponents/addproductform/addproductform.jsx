@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./addproductform.css"
 import { toast } from "react-toastify";
-import { userRequest } from "../../redux/apicalls";
+import { userRequest } from "../../requestMethods";
+
 
 
 const Addproductform = () => {
@@ -10,7 +11,6 @@ const Addproductform = () => {
     const [image, setImage] = useState("")
     const [size, setSize] = useState([])
     const [color, setColor] = useState([])
-    const [upLoad, setUpLoad] = useState("")
     const [price, setPrice] = useState("")
     const [desc, setDesc] = useState("")
     const [discount, setDiscount] = useState("")
@@ -20,6 +20,8 @@ const Addproductform = () => {
     const [fabric, setFabric] = useState("")
     const [category, setCategory] = useState("")
     const [name, setName] = useState("")
+    const [brand, setBrand] = useState("")
+    const imageref = useRef();
 
     const handleChange = (e) => {
         setInputs(prevState => ({ ...prevState, [e.target.name]: e.target.value }));
@@ -34,53 +36,45 @@ const Addproductform = () => {
         setInputs(inputs.color = "")
     }
 
-    const onChangeImage = async (e) => {
-        if (e.target.files[0]) {
-            setUpLoad(e.target.files[0])
-            console.log(upLoad)
+
+    const onChangeImage = (event) => {
+        if (event.target.files && event.target.files[0]) {
+            let file = event.target.files[0];
+            setFileToBase(file);
+            console.log(file)
         }
-        handleUpload()
     }
-
-    const handleUpload = async () => {
-
-        const data = new FormData()
-        data.append("file", upLoad)
-        data.append("upload_preset", "dressupstore")
-        data.append("cloud_name", "ddsepnnsm")
-        await fetch("  https://api.cloudinary.com/v1_1/ddsepnnsm/image/upload", {
-            method: "post",
-            body: data
-        })
-            .then(resp => resp.json())
-            .then(data => {
-                setImage(data.url)
-            })
-            .catch(err => console.log(err))
+    const setFileToBase = (file) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () => {
+            setImage(reader.result);
+        }
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        try {
-            const res = await userRequest.post("/product",
-                {
-                    name,
-                    desc, qty, price, mrp, discount, gender, category, fabric,
-                    image,
-                    color,
-                    size,
-                }
-            )
-            const data = await res.data;
 
-            if (data === "orders Sucessfully") {
-                toast.success("created Sucessfully", {
-                    position: "bottom-center"
-                })
-            }
-        } catch (err) {
-            return (err)
+        const newProduct = {
+            name,
+            desc, qty, price, mrp, discount, gender, category, fabric,
+            color,
+            size,
+            brand,
+            image
         }
+
+
+        const res = await userRequest.post("/product", newProduct)
+
+        const data = await res.data;
+
+        if (data === "orders Sucessfully") {
+            toast.success("created Sucessfully", {
+                position: "bottom-center"
+            })
+        }
+
     }
 
 
@@ -99,7 +93,7 @@ const Addproductform = () => {
                 <div className="form-rows">
                     <div className="product-inputs">
                         <label htmlFor="">Image:-</label>
-                        <input type="file" onChange={onChangeImage} required />
+                        <input type="file" ref={imageref} onChange={onChangeImage} />
                     </div>
                     <div className="product-inputs" >
                         <label htmlFor="">Gender:-</label>
@@ -109,6 +103,10 @@ const Addproductform = () => {
                             <option value={"womens"}>Womens</option>
                             <option value={"kids"}>Kids</option>
                         </select>
+                        <div className="product-inputs">
+                            <label htmlFor="">Brand:-</label>
+                            <input type="text" onChange={(e) => setBrand(e.target.value)} required />
+                        </div>
                     </div>
 
                 </div>
@@ -125,13 +123,12 @@ const Addproductform = () => {
                         <label htmlFor="">Catagory:-</label>
                         <select name="" id="options" onChange={(e) => setCategory(e.target.value)} required>
                             <option>Options</option>
-                            <option>Shirts</option>
-                            <option>Jeans</option>
-                            <option>Dresses</option>
-                            <option>Hoodies</option>
-                            <option>ChudiDhar</option>
-                            <option>Accessories</option>
-                            <option>Shoes</option>
+                            <option value={"shirt"}>Shirts</option>
+                            <option value={"jeans"}>Jeans</option>
+                            <option value={"dress"}>Dresses</option>
+                            <option value={"hoodies"}>Hoodies</option>
+                            <option value={"chudidhar"}>ChudiDhar</option>
+                            <option value={"shoes"}>Shoes</option>
                         </select>
                     </div>
 
@@ -160,15 +157,27 @@ const Addproductform = () => {
                     <div className="add-size">
                         <div className="form-rows">
                             <label htmlFor="">Sizes:-</label>
-                            <select name="size" id="" onChange={handleChange} required>
-                                <option value="">select</option>
-                                <option value="XS">XS</option>
-                                <option value="S">S</option>
-                                <option value="M">M</option>
-                                <option value="L">L</option>
-                                <option value="XL">XL</option>
-                                <option value="XXL">XXL</option>
-                            </select>
+                            {category === "shoes" ?
+                                <select name="size" id="" onChange={handleChange} required>
+                                    <option value="">select</option>
+                                    <option value="6">6</option>
+                                    <option value="6.5">6.5</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                                :
+                                <select name="size" id="" onChange={handleChange} required>
+                                    <option value="">select</option>
+                                    <option value="XS">XS</option>
+                                    <option value="S">S</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                    <option value="XXL">XXL</option>
+                                </select>
+                            }
                             <button type="button" style={{ width: "fit-content" }} onClick={handleSize}>Add</button>
                         </div>
 

@@ -39,13 +39,6 @@ const Navber = () => {
             <Link to={"/products/women"} onMouseEnter={() => setMens(true)} style={{ textDecoration: "none" }}>
               <li>WOMENS </li>
             </Link>
-            <Link to={"/products?cat=accessories"} style={{ textDecoration: "none" }}>
-              <li>ACCESSORIES</li>
-            </Link>
-
-            <Link to={"/products?cat=shoes"} style={{ textDecoration: "none" }}>
-              <li>SHOES </li>
-            </Link>
             <Link to={"/"} style={{ textDecoration: "none" }}>
               <li>ABOUT </li>
             </Link>

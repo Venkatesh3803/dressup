@@ -14,6 +14,7 @@ import DashboardAddProduct from "./dashboardPages/dashboardAddproduct/dashboardA
 import DashboardOrderspage from "./dashboardPages/dashboardOrders/dashboardOrderspage";
 import MensProducts from "./pages/mensProducts/MensProducts";
 import WomensProducts from "./pages/mensProducts/WomensProducts";
+import ShoesPage from "./pages/mensProducts/ShoesPage";
 // import DashboardOrderspage from "./dashboardPages/dashboardOrderspage/dashboardOrderspage";
 
 
@@ -27,6 +28,7 @@ function App() {
         <Route path="/products?" element={<ProductsPage />} />
         <Route path="/products/mens" element={<MensProducts />} />
         <Route path="/products/women" element={<WomensProducts />} />
+        <Route path="/products/shoes" element={<ShoesPage />} />
         <Route path="/singleproducts/:id" element={<SingleProductPage />} />
         <Route path="/checkout" element={user ? <CheckOutPage /> : <Navigate to={"../login"} />} />
         <Route path="/login" element={user ? <Navigate to={"/"} /> : <LoginPage />} />

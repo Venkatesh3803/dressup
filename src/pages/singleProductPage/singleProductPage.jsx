@@ -3,7 +3,8 @@ import Navber from '../../components/navber/navber'
 import Footer from '../../components/footer/Footer'
 import Singlepagedesign from '../../components/singlepageDesign/singlepagedesign'
 import { useParams } from 'react-router-dom'
-import { publicRequest } from '../../redux/apicalls'
+import { publicRequest } from '../../requestMethods'
+
 
 
 const SingleProductPage = () => {

@@ -1,23 +1,5 @@
+import { publicRequest } from "../requestMethods";
 import { RegisterFail, RegisterStarts, RegisterSucessFull, loginFail, loginStarts, loginSucessFull } from "./authReducer";
-import axios from "axios"
-
-
-// http://localhost:5000/api
-//https://dressup-backend.onrender.com/api
-const BASE_URL = "https://dressup-backend.onrender.com/api";
-export const publicRequest = axios.create({
-    baseURL: BASE_URL,
-});
-
-const user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : ""
-const TOKEN = user.token
-
-
-export const userRequest = axios.create({
-    baseURL: BASE_URL,
-    headers: { token: `Bearer ${TOKEN}` },
-});
-
 
 
 export const login = async (dispatch, user) => {
