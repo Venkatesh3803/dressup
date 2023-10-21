@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import "./addproductform.css"
 import { toast } from "react-toastify";
 import { userRequest } from "../../requestMethods";
+import axios from "axios";
 
 
 
@@ -21,7 +22,7 @@ const Addproductform = () => {
     const [category, setCategory] = useState("")
     const [name, setName] = useState("")
     const [brand, setBrand] = useState("")
-    const imageref = useRef();
+
 
     const handleChange = (e) => {
         setInputs(prevState => ({ ...prevState, [e.target.name]: e.target.value }));
@@ -37,20 +38,27 @@ const Addproductform = () => {
     }
 
 
-    const onChangeImage = (event) => {
-        if (event.target.files && event.target.files[0]) {
-            let file = event.target.files[0];
-            setFileToBase(file);
-            console.log(file)
+    const handleUpload = async (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            try {
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('upload_preset', 'dressupstore');
+                const response = await axios.post(
+                    'https://api.cloudinary.com/v1_1/ddsepnnsm/image/upload',
+                    formData
+                );
+                const imageUrl = response.data.secure_url;
+                setImage(imageUrl);
+
+            } catch (err) {
+                console.log(err)
+            }
+
         }
     }
-    const setFileToBase = (file) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onloadend = () => {
-            setImage(reader.result);
-        }
-    }
+
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -61,7 +69,7 @@ const Addproductform = () => {
             color,
             size,
             brand,
-            image
+            image: image
         }
 
 
@@ -69,7 +77,7 @@ const Addproductform = () => {
 
         const data = await res.data;
 
-        if (data === "orders Sucessfully") {
+        if (res.status === 201) {
             toast.success("created Sucessfully", {
                 position: "bottom-center"
             })
@@ -93,14 +101,14 @@ const Addproductform = () => {
                 <div className="form-rows">
                     <div className="product-inputs">
                         <label htmlFor="">Image:-</label>
-                        <input type="file" ref={imageref} onChange={onChangeImage} />
+                        <input type="file" onChange={handleUpload} />
                     </div>
                     <div className="product-inputs" >
                         <label htmlFor="">Gender:-</label>
                         <select name="gender" id="gender" onChange={(e) => setGender(e.target.value)} required>
                             <option>Options</option>
                             <option value={"mens"}>Mens</option>
-                            <option value={"womens"}>Womens</option>
+                            <option value={"women"}>Womens</option>
                             <option value={"kids"}>Kids</option>
                         </select>
                         <div className="product-inputs">

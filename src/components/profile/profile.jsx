@@ -5,27 +5,27 @@ import { logOut } from "../../redux/authReducer"
 import { CgProfile } from 'react-icons/cg'
 import { AiOutlineLogout, AiOutlineSetting, AiOutlineShoppingCart } from 'react-icons/ai'
 import { LuLayoutDashboard } from 'react-icons/lu'
-import { userRequest } from '../../requestMethods'
+// import { userRequest } from '../../requestMethods'
 import { Link } from 'react-router-dom'
 
 
 const Profile = ({ setProfile }) => {
     const user = useSelector((state) => state.auth.user)
     const dispatch = useDispatch()
-    const [currUser, setCurrUser] = useState("")
+    // const [currUser, setCurrUser] = useState("")
 
-    useEffect(() => {
-        const getUser = async () => {
-            try {
-                const res = await userRequest.get(`/user/${user._id}`);
-                const date = await res.data;
-                setCurrUser(date)
-            } catch (error) {
-                console.log(error)
-            }
-        }
-        getUser();
-    }, [user._id])
+    // useEffect(() => {
+    //     const getUser = async () => {
+    //         try {
+    //             const res = await userRequest.get(`/user/${user._id}`);
+    //             const date = await res.data;
+    //             setCurrUser(date)
+    //         } catch (error) {
+    //             console.log(error)
+    //         }
+    //     }
+    //     getUser();
+    // }, [user._id])
 
 
 
@@ -44,7 +44,7 @@ const Profile = ({ setProfile }) => {
                 </div>
             </Link>
 
-            {currUser.isAdmin &&
+            {user.isAdmin &&
                 <Link className="link" to={"../dashboard"}>
                     <div className="pro-list">
                         <LuLayoutDashboard />

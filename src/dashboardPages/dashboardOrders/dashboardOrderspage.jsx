@@ -14,12 +14,13 @@ const DashboardOrderspage = () => {
                 const date = await res.data;
                 setOrders(date)
             } catch (error) {
-                console.log(error)
+                return (error)
             }
         }
         getUser();
     }, [])
 
+    console.log(orders)
 
 
     const handleStatus = async (id, status) => {
@@ -46,6 +47,8 @@ const DashboardOrderspage = () => {
             toast.success("updated")
         }
     }
+
+
 
     return (
         <>
@@ -79,7 +82,7 @@ const DashboardOrderspage = () => {
                                             {o.products.map((p) => {
                                                 return (
                                                     <tr key={p._id}>
-                                                        <img src="https://m.media-amazon.com/images/I/71A8tXUbL9L._UY879_.jpg" alt="" />
+                                                        <img src={p?.image} alt="" />
                                                         <hr />
                                                     </tr>
                                                 )

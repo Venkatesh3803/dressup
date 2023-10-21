@@ -71,12 +71,11 @@ const Products = ({ popular, products, singlepage, fillters, gend }) => {
                                 <option value={"shirt"}>Shirts</option>
                                 <option value={"kurtha"}>Kurthas</option>
                                 <option value={"dress"}>Dresses</option>
+                                <option value={"chudidhar"}>Chudidhar</option>
                                 <option value={"hoodie"}>Hoodies</option>
                                 <option value={"jeans"}>Jeans</option>
                                 <option value={"shorts"}>Shorts</option>
                                 <option value={"shoes"}>Shoes</option>
-
-
                             </select>
                         </div>
                         <div className="filter-input">

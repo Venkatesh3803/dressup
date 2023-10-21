@@ -113,7 +113,7 @@ const Checkoutform = () => {
                         <hr />
                         <div className="checkout-subtotal">
                             <span style={{ fontWeight: "600" }}>Grand Total</span>
-                            <span> ₹{total + shipping}.00</span>
+                            <span> ₹{total }.00</span>
                         </div>
 
 

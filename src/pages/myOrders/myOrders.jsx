@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import Navber from '../../components/navber/navber'
 import Footer from '../../components/footer/Footer'
 import "./myOrders.css"
-
 import { useSelector } from 'react-redux'
 import { userRequest } from '../../requestMethods'
 
@@ -108,15 +107,15 @@ const MyOrders = () => {
                                     <div className="myorders_total">
                                         <div className="myorders_subtotal">
                                             <p>Sub Total</p>
-                                            <h4>₹45</h4>
+                                            <h4>₹{o.totalPrice}</h4>
                                         </div>
                                         <div className="myorders_subtotal">
                                             <p>Shipping</p>
-                                            <h4>Free</h4>
+                                            <h4>₹60</h4>
                                         </div>
                                         <div className="myorders_subtotal">
                                             <p>Discount</p>
-                                            <h4>-₹5</h4>
+                                            <h4>0</h4>
                                         </div>
                                         <hr />
                                         <div className="myorders_subtotal">
