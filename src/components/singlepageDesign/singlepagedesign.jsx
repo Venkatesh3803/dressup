@@ -60,7 +60,7 @@ const Singlepagedesign = ({ product }) => {
                             <div className="sizes">
                                 {product?.size?.map((s) => {
                                     return (
-                                        <span onClick={() => setSize(s)} >{s}</span>
+                                        <span className={size === s ? "selectedSize" : ""} onClick={() => setSize(s)} >{s}</span>
                                     )
                                 })}
                             </div>
@@ -71,7 +71,7 @@ const Singlepagedesign = ({ product }) => {
                             <h4>Colors</h4>
                             <div className="colors">
                                 {product.color?.map((i) => {
-                                    return <span onClick={() => setColor(i)} style={{ backgroundColor: `${i}` }}></span>
+                                    return <span onClick={() => setColor(i)} style={{  border: color === i ? "6px solid black" : "", backgroundColor:`${i}`  }}></span>
                                 })}
                             </div>
                         </div>

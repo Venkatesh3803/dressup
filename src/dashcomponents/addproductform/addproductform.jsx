@@ -113,7 +113,7 @@ const Addproductform = () => {
                         </select>
                         <div className="product-inputs">
                             <label htmlFor="">Brand:-</label>
-                            <input type="text" onChange={(e) => setBrand(e.target.value)} required />
+                            <input type="text" placeholder="Puma" onChange={(e) => setBrand(e.target.value)} required />
                         </div>
                     </div>
 

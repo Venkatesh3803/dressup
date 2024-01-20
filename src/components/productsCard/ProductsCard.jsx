@@ -24,9 +24,22 @@ const ProductsCard = ({ single, prod }) => {
                         <h3>{prod.name}</h3>
                         <div className="details">
                             <div className="d-left">
-                                <p>Brand</p>
+                                <p>{prod.brand}</p>
+                                <div className="color">
+                                    <div className="card-colors">
+                                        {prod.color?.map((i) => {
+                                            return <span style={{ backgroundColor: `${i}` }}></span>
+                                        })}
+                                    </div>
+                                </div>
                                 <div className="size">
-
+                                    <div className="card-sizes">
+                                        {prod?.size?.map((s) => {
+                                            return (
+                                                <span >{s}</span>
+                                            )
+                                        })}
+                                    </div>
                                 </div>
                             </div>
                             <div className="d-right">

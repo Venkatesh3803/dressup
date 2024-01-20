@@ -2,7 +2,7 @@ import SideBar from '../../dashcomponents/sidebar/sideBar'
 import DashNavbar from '../../dashcomponents/dashNavber/dashNavber'
 import DashboardProducts from '../../dashcomponents/dashboardproducts/dashboardProducts'
 import { useEffect, useState } from 'react'
-import axios from 'axios'
+import { publicRequest } from '../../requestMethods'
 
 
 
@@ -10,7 +10,7 @@ const DashproductsPage = () => {
     const [prod, setProd] = useState("")
     useEffect(() => {
         const getAllProducts = async () => {
-            const res = await axios.get("http://localhost:5000/api/product");
+            const res = await publicRequest.get("/product");
             const date = await res.data;
             setProd(date)
         }

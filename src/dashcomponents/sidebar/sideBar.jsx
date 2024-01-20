@@ -41,10 +41,12 @@ const SideBar = () => {
                         <span>orders</span>
                     </div>
                 </Link>
-                <div className="list">
-                    <BiUserCircle className="icons" />
-                    <span>users</span>
-                </div>
+                <Link to={"../dashusers"} className="dashlink">
+                    <div className="list">
+                        <BiUserCircle className="icons" />
+                        <span>orders</span>
+                    </div>
+                </Link>
                 <div className="head">
                     <span className="main">list</span>
                     <div className="list">

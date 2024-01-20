@@ -97,9 +97,7 @@
     font-weight: 500;
 }
 
-.sizes span:hover {
-    background-color: rgb(231, 228, 228);
-}
+
 
 .colors span {
     display: flex;
@@ -113,9 +111,6 @@
     margin: 1px;
 }
 
-.colors span:hover {
-    border: 4px solid gray;
-}
 
 
 .singlepagedesign-right>button {
@@ -151,10 +146,16 @@
     background-color: rgb(103, 103, 107);
 }
 
-.selected {
-    background-color: beige;
-    border: 2px solid black;
+
+.selectedSize {
+    background-color: rgb(62, 62, 175);
+    color: white;
 }
+
+.selectedSize:hover {
+    color: black;
+}
+
 
 @media screen and (max-width:780px) {
     .singlepagedesign-container {

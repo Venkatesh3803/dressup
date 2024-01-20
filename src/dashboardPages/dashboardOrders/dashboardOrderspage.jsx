@@ -20,7 +20,6 @@ const DashboardOrderspage = () => {
         getUser();
     }, [])
 
-    console.log(orders)
 
 
     const handleStatus = async (id, status) => {

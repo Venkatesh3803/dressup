@@ -83,7 +83,7 @@ const MyOrders = () => {
                                                     <p>  {o.house_no} {o.address}</p>
                                                 </div>
                                                 <div className="myorders_shipping">
-                                                    <h3>Shipping Updates</h3>
+                                                    <h3>Shipping Details</h3>
                                                     <p>{o.email}</p>
                                                     <p>{o.phonenumber}</p>
                                                 </div>
