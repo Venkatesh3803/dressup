@@ -1,19 +1,26 @@
 import SideBar from '../../dashcomponents/sidebar/sideBar'
 import DashNavbar from '../../dashcomponents/dashNavber/dashNavber'
 import { useEffect, useState } from 'react'
-import { userRequest } from '../../requestMethods'
+import { getAllUser } from '../../requestMethods'
+import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 
 
 
 const DashUsers = () => {
     const [users, setUsers] = useState([])
+    const navigate = useNavigate()
     useEffect(() => {
-        const getAllProducts = async () => {
-            const res = await userRequest.get("/user/admin/getallusers");
-            const date = await res.data;
-            setUsers(date)
-        }
-        getAllProducts();
+        const user = localStorage.getItem("user") && JSON.parse(localStorage.getItem("user"))
+        getAllUser("/user/admin/getallusers", "get", user.token).then((res) => {
+            setUsers(res)
+
+        }).catch((err) => {
+            if (err.response.data === 'jwt expired') {
+                toast.warn("Session expired please login");
+                navigate("/")
+            }
+        })
     }, [])
 
     return (
@@ -41,7 +48,7 @@ const DashUsers = () => {
                             <tbody>
                                 {users.map((u) => {
                                     return (
-                                        <tr>
+                                        <tr key={u._id}>
                                             <td>{u._id}</td>
                                             <td>{u.username}</td>
                                             <td>{u.email}</td>

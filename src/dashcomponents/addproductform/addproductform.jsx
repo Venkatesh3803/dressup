@@ -1,7 +1,7 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import "./addproductform.css"
 import { toast } from "react-toastify";
-import { userRequest } from "../../requestMethods";
+import { createProduct, userRequest } from "../../requestMethods";
 import axios from "axios";
 
 
@@ -29,14 +29,20 @@ const Addproductform = () => {
     }
 
     const handleSize = () => {
-        size.push(inputs.size)
-        setInputs(inputs.size = "")
+        if (inputs.size === "") return toast.warn("enter size")
+        size?.push(inputs.size)
+        setInputs(inputs.size === "")
     }
     const handleColor = () => {
-        color.push(inputs.color)
-        setInputs(inputs.color = "")
+        color?.push(inputs.color)
+        setInputs(inputs.color === "")
     }
-
+    const handleRemoveSize = (s) => {
+        setSize(size.filter((item) => item !== s))
+    }
+    const handleRemoveColor = (c) => {
+        setColor(color.filter((item) => item !== c))
+    }
 
     const handleUpload = async (e) => {
         const file = e.target.files[0];
@@ -62,7 +68,7 @@ const Addproductform = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-
+        const user = localStorage.getItem("user") && JSON.parse(localStorage.getItem("user"))
         const newProduct = {
             name,
             desc, qty, price, mrp, discount, gender, category, fabric,
@@ -72,17 +78,13 @@ const Addproductform = () => {
             image: image
         }
 
-
-        const res = await userRequest.post("/product", newProduct)
-
-        const data = await res.data;
-
-        if (res.status === 201) {
-            toast.success("created Sucessfully", {
-                position: "bottom-center"
-            })
-        }
-
+        createProduct("/product", "post", user.token, newProduct).then((res) => {
+            if (res) {
+                toast.success("created Sucessfully", {
+                    position: "bottom-center"
+                })
+            }
+        })
     }
 
 
@@ -103,14 +105,16 @@ const Addproductform = () => {
                         <label htmlFor="">Image:-</label>
                         <input type="file" onChange={handleUpload} />
                     </div>
-                    <div className="product-inputs" >
-                        <label htmlFor="">Gender:-</label>
-                        <select name="gender" id="gender" onChange={(e) => setGender(e.target.value)} required>
-                            <option>Options</option>
-                            <option value={"mens"}>Mens</option>
-                            <option value={"women"}>Womens</option>
-                            <option value={"kids"}>Kids</option>
-                        </select>
+                    <div className="form-rows" >
+                        <div className="product-inputs">
+                            <label htmlFor="">Gender:-</label>
+                            <select name="gender" id="gender" onChange={(e) => setGender(e.target.value)} required>
+                                <option>Options</option>
+                                <option value={"mens"}>Mens</option>
+                                <option value={"women"}>Womens</option>
+                                <option value={"kids"}>Kids</option>
+                            </select>
+                        </div>
                         <div className="product-inputs">
                             <label htmlFor="">Brand:-</label>
                             <input type="text" placeholder="Puma" onChange={(e) => setBrand(e.target.value)} required />
@@ -121,7 +125,7 @@ const Addproductform = () => {
                 <div className="form-rows" >
                     <div className="product-inputs">
                         <label htmlFor="">Quantity:-</label>
-                        <input type="text" placeholder="Qty" name="qty" onChange={(e) => setQty(e.target.value)} required />
+                        <input type="number" placeholder="Qty" name="qty" onChange={(e) => setQty(e.target.value)} required />
                     </div>
                     <div className="product-inputs">
                         <label htmlFor="">Fabric:-</label>
@@ -150,20 +154,20 @@ const Addproductform = () => {
                 <div className="form-rows">
                     <div className="product-inputs">
                         <label htmlFor="">Price:-</label>
-                        <input type="text" placeholder="Price" name="price" onChange={(e) => setPrice(e.target.value)} required />
+                        <input type="number" placeholder="Price" name="price" onChange={(e) => setPrice(e.target.value)} required />
                     </div>
                     <div className="product-inputs">
                         <label htmlFor="">MRP:-</label>
-                        <input type="text" placeholder="Mrp" name="mrp" onChange={(e) => setMrp(e.target.value)} />
+                        <input type="number" placeholder="Mrp" name="mrp" onChange={(e) => setMrp(e.target.value)} />
                     </div>
                     <div className="product-inputs">
                         <label htmlFor="">Discount:-</label>
-                        <input type="text" placeholder="Discout % " name="discount" onChange={(e) => setDiscount(e.target.value)} />
+                        <input type="number" placeholder="Discout % " name="discount" onChange={(e) => setDiscount(e.target.value)} />
                     </div>
                 </div>
                 <div className="color-and-size">
                     <div className="add-size">
-                        <div className="form-rows">
+                        <div className="size-rows">
                             <label htmlFor="">Sizes:-</label>
                             {category === "shoes" ?
                                 <select name="size" id="" onChange={handleChange} required>
@@ -190,17 +194,20 @@ const Addproductform = () => {
                         </div>
 
                         <div className="size-list">
-                            {size && size.map((s) => {
+                            {size && size?.map((s) => {
                                 return (
-                                    <li key={s}>{s}</li>
+                                    <>
+                                        <li key={s}>{s}
+                                            <span onClick={() => handleRemoveSize(s)}>X</span>
+                                        </li>
+                                    </>
                                 )
                             })}
                         </div>
                     </div>
 
                     <div className="add-color">
-
-                        <div className="form-rows">
+                        <div className="color-rows">
                             <label htmlFor="">Colors:-</label>
                             <select name="color" id="" onChange={handleChange} required>
                                 <option value="">select</option>
@@ -221,7 +228,11 @@ const Addproductform = () => {
                         <div className="color-list">
                             {color && color.map((c) => {
                                 return (
-                                    <span key={c} style={{ backgroundColor: `${c}` }}></span>
+                                    <>
+                                        <p key={c} style={{ backgroundColor: `${c}` }}>
+                                            <span onClick={() => handleRemoveColor(c)}>X</span>
+                                        </p>
+                                    </>
                                 )
                             })}
                         </div>

@@ -3,7 +3,7 @@ import { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { clearCart, removeProduct } from "../../redux/cartReducer"
 import { toast } from "react-toastify"
-import { userRequest } from "../../requestMethods"
+import { makeOrder } from "../../requestMethods"
 import { Link } from "react-router-dom"
 
 
@@ -12,7 +12,6 @@ const Checkoutform = () => {
 
     const [payNow, setPayNow] = useState(false);
     const [inputs, setInputs] = useState({});
-    const user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : ""
     const cart = useSelector((state) => state.cart);
     let total = useSelector((state) => state.cart.total);
     const dispatch = useDispatch()
@@ -25,30 +24,30 @@ const Checkoutform = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+
+        const user = localStorage.getItem("user") && JSON.parse(localStorage.getItem("user"))
+        const data = {
+            userId: user._id,
+            email: inputs.email,
+            products: products,
+            address: inputs.address,
+            house_no: inputs.house_no,
+            city: inputs.city,
+            province: inputs.province,
+            pincode: inputs.pincode,
+            totalPrice: total,
+            phonenumber: inputs.phonenumber,
+            paymentType: "COD",
+        }
         try {
-            const res = await userRequest.post("/order", {
-                userId: user._id,
-                email: inputs.email,
-                products: products,
-                address: inputs.address,
-                house_no: inputs.house_no,
-                city: inputs.city,
-                province: inputs.province,
-                pincode: inputs.pincode,
-                totalPrice: total,
-                phonenumber: inputs.phonenumber,
-                paymentType: "COD",
-            },
+            makeOrder("/order", "post", data, user.token).then((res) => {
+                if (res === "orders Sucessfully") {
+                    toast.success("ordered Sucessfully", {
+                        position: "bottom-center"
+                    })
+                }
+            })
 
-
-            )
-            const data = await res.data;
-
-            if (data === "orders Sucessfully") {
-                toast.success("ordered Sucessfully", {
-                    position: "bottom-center"
-                })
-            }
 
             dispatch(clearCart())
 
@@ -113,7 +112,7 @@ const Checkoutform = () => {
                         <hr />
                         <div className="checkout-subtotal">
                             <span style={{ fontWeight: "600" }}>Grand Total</span>
-                            <span> ₹{total }.00</span>
+                            <span> ₹{total}.00</span>
                         </div>
 
 
@@ -124,11 +123,11 @@ const Checkoutform = () => {
                     <form action="" onSubmit={handleSubmit}>
                         <div className="from-inputs">
                             <label htmlFor="">Email address</label>
-                            <input type="text" placeholder='xyz@gmail.com' name="email" value={inputs.email || ""} onChange={handleChange} />
+                            <input type="text" placeholder='xyz@gmail.com' name="email" required value={inputs.email || ""} onChange={handleChange} />
                         </div>
                         <div className="from-inputs">
                             <label htmlFor="">phone Number</label>
-                            <input type="text" placeholder='' name="phonenumber" value={inputs.phonenumber || ""} onChange={handleChange} />
+                            <input type="text" placeholder='' name="phonenumber" required value={inputs.phonenumber || ""} onChange={handleChange} />
                         </div>
                         <div style={{ display: "flex", gap: "1rem" }}>
                             <span className="paynow-btn" onClick={() => setPayNow(!payNow)}>Pay Now</span>
@@ -162,7 +161,7 @@ const Checkoutform = () => {
 
                         <div className="from-inputs">
                             <label htmlFor="">Address</label>
-                            <input type="text" name="address" value={inputs.address || ""} onChange={handleChange} />
+                            <input type="text" name="address" required value={inputs.address || ""} onChange={handleChange} />
                         </div>
                         <div className="from-inputs">
                             <label htmlFor="">House Number</label>
@@ -171,19 +170,23 @@ const Checkoutform = () => {
                         <div className="form-col">
                             <div className="from-inputs">
                                 <label htmlFor="">City</label>
-                                <input type="text" name="city" value={inputs.city || ""} onChange={handleChange} />
+                                <input type="text" name="city" required value={inputs.city || ""} onChange={handleChange} />
                             </div>
                             <div className="from-inputs">
                                 <label htmlFor="">State / Province</label>
-                                <input type="text" name="province" value={inputs.province || ""} onChange={handleChange} />
+                                <input type="text" name="province" required value={inputs.province || ""} onChange={handleChange} />
                             </div>
                             <div className="from-inputs">
                                 <label htmlFor="">Postal Code</label>
-                                <input type="text" name="pincode" value={inputs.pincode || ""} onChange={handleChange} />
+                                <input type="text" name="pincode" required value={inputs.pincode || ""} onChange={handleChange} />
                             </div>
                         </div>
                         <hr />
-                        <button type="submit">Place Order</button>
+                        {products.length === 0 ?
+                            <button type="submit" className="disable" disabled >Place Order</button>
+                            :
+                            <button type="submit">Place Order</button>
+                        }
                     </form>
 
 

@@ -44,7 +44,7 @@ const SideBar = () => {
                 <Link to={"../dashusers"} className="dashlink">
                     <div className="list">
                         <BiUserCircle className="icons" />
-                        <span>orders</span>
+                        <span>Users</span>
                     </div>
                 </Link>
                 <div className="head">

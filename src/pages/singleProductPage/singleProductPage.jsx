@@ -3,7 +3,7 @@ import Navber from '../../components/navber/navber'
 import Footer from '../../components/footer/Footer'
 import Singlepagedesign from '../../components/singlepageDesign/singlepagedesign'
 import { useParams } from 'react-router-dom'
-import { publicRequest } from '../../requestMethods'
+import { getSingleProducts } from '../../requestMethods'
 
 
 
@@ -11,12 +11,10 @@ const SingleProductPage = () => {
   const [product, setProduct] = useState("")
   const { id } = useParams()
   useEffect(() => {
-    const getAllProducts = async () => {
-      const res = await publicRequest.get(`/product/single/${id}`);
-      const date = await res.data;
-      setProduct(date)
-    }
-    getAllProducts();
+    getSingleProducts(`/product/single/${id}`, "get").then((res) => {
+      setProduct(res)
+    })
+
   }, [id])
   return (
     <>

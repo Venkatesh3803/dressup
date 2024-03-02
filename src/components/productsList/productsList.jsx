@@ -1,7 +1,7 @@
 import "./productsList.css"
 import ProductsCard from "../productsCard/ProductsCard"
 import { useEffect, useState } from "react"
-import { publicRequest } from "../../requestMethods"
+import { getAllProducts, publicRequest } from "../../requestMethods"
 
 
 
@@ -15,12 +15,9 @@ const Products = ({ popular, products, singlepage, fillters, gend }) => {
 
 
     useEffect(() => {
-        const getAllProducts = async () => {
-            const res = await publicRequest.get(gender ? `/product?gender=${gender}&size=${size}&color=${color}&cat=${cat}` : `/product?gender=${gend}`);
-            const date = await res.data;
-            setProd(date)
-        }
-        getAllProducts();
+        getAllProducts(gender ? `/product?gender=${gender}&size=${size}&color=${color}&cat=${cat}` : `/product?gender=${gend}`, "get").then((res) => {
+            setProd(res)
+        })
     }, [size, color, cat, queries, gender])
 
 

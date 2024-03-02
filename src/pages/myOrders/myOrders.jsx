@@ -3,7 +3,7 @@ import Navber from '../../components/navber/navber'
 import Footer from '../../components/footer/Footer'
 import "./myOrders.css"
 import { useSelector } from 'react-redux'
-import { userRequest } from '../../requestMethods'
+import { getOrders, userRequest } from '../../requestMethods'
 
 
 
@@ -14,16 +14,15 @@ const MyOrders = () => {
     const user = useSelector((state) => state.auth.user)
 
     useEffect(() => {
-        const getOrders = async () => {
-            try {
-                const res = await userRequest.get(`/order/single/${user._id}`);
-                const date = await res.data;
-                setOrders(date)
-            } catch (error) {
-                console.log(error)
-            }
+        const user = localStorage.getItem("user") && JSON.parse(localStorage.getItem("user"))
+        try {
+            getOrders(`/order/single/${user._id}`, "get", user.token).then((res) => {
+                setOrders(res)
+            })
+        } catch (error) {
+            throw error
         }
-        getOrders();
+
     }, [user._id])
 
 

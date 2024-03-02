@@ -2,27 +2,30 @@ import React, { useEffect, useState } from 'react'
 import SideBar from '../../dashcomponents/sidebar/sideBar'
 import DashNavbar from '../../dashcomponents/dashNavber/dashNavber'
 import { toast } from 'react-toastify'
-import { userRequest } from '../../requestMethods'
+import { getAllUser, updateOrder, } from '../../requestMethods'
+import { useNavigate } from 'react-router-dom'
 
 const DashboardOrderspage = () => {
     const [orders, setOrders] = useState("")
+    const navigate = useNavigate();
 
     useEffect(() => {
-        const getUser = async () => {
-            try {
-                const res = await userRequest.get(`/order/`);
-                const date = await res.data;
-                setOrders(date)
-            } catch (error) {
-                return (error)
+        const user = localStorage.getItem("user") && JSON.parse(localStorage.getItem("user"))
+        getAllUser("/order", "get", user.token).then((res) => {
+
+            setOrders(res)
+        }).catch((err) => {
+            if (err.response.data === 'jwt expired') {
+                toast.warn("Session expired please login");
+                navigate("/")
             }
-        }
-        getUser();
+        })
     }, [])
 
 
 
     const handleStatus = async (id, status) => {
+        const user = localStorage.getItem("user") && JSON.parse(localStorage.getItem("user"))
         if (status === "processing") {
             status = "shipped"
         } else if (status === "shipped") {
@@ -37,17 +40,13 @@ const DashboardOrderspage = () => {
             return toast.warn("This Order Already Canceled")
         }
 
-        const res = await userRequest.patch(`/order/${id}`, {
-            status
+        updateOrder(`/order/${id}`, "patch", status, user.token).then((res) => {
+            if (res === "updated") {
+                toast.success("updated")
+            }
         });
 
-        const data = res.data;
-        if (data === "updated") {
-            toast.success("updated")
-        }
     }
-
-
 
     return (
         <>

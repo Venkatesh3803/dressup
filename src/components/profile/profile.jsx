@@ -12,22 +12,7 @@ import { Link } from 'react-router-dom'
 const Profile = ({ setProfile }) => {
     const user = useSelector((state) => state.auth.user)
     const dispatch = useDispatch()
-    // const [currUser, setCurrUser] = useState("")
-
-    // useEffect(() => {
-    //     const getUser = async () => {
-    //         try {
-    //             const res = await userRequest.get(`/user/${user._id}`);
-    //             const date = await res.data;
-    //             setCurrUser(date)
-    //         } catch (error) {
-    //             console.log(error)
-    //         }
-    //     }
-    //     getUser();
-    // }, [user._id])
-
-
+    
 
     return (
         <div className="profile" onMouseLeave={() => setProfile(false)}>

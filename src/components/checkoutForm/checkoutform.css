@@ -178,8 +178,14 @@ form {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-
 }
+
+
+.disable{
+    background-color: aliceblue;
+    cursor: not-allowed;
+}
+
 
 @media screen and (min-width:780px) {
     .checkout-container {

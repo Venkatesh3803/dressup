@@ -2,19 +2,20 @@ import SideBar from '../../dashcomponents/sidebar/sideBar'
 import DashNavbar from '../../dashcomponents/dashNavber/dashNavber'
 import DashboardProducts from '../../dashcomponents/dashboardproducts/dashboardProducts'
 import { useEffect, useState } from 'react'
-import { publicRequest } from '../../requestMethods'
+import { getAllProducts } from '../../requestMethods'
 
 
 
 const DashproductsPage = () => {
-    const [prod, setProd] = useState("")
+    const [prod, setProd] = useState([])
     useEffect(() => {
-        const getAllProducts = async () => {
-            const res = await publicRequest.get("/product");
-            const date = await res.data;
-            setProd(date)
+        try {
+            getAllProducts("/product").then((res) => {
+                setProd(res.products)
+            })
+        } catch (error) {
+            throw error
         }
-        getAllProducts();
     }, [])
 
     return (
@@ -25,9 +26,7 @@ const DashproductsPage = () => {
                     <SideBar />
                 </div>
                 <div className="dash-right">
-
-                    <DashboardProducts product={prod.products} />
-
+                    <DashboardProducts product={prod} setProd={setProd} />
                 </div>
             </div>
         </>
